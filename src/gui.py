@@ -124,7 +124,7 @@ def ui_pdf_file():
 	disabled = not ss.get('user') or (not ss.get('api_key') and not ss.get('community_pct',0))
 	t1,t2 = st.tabs(['UPLOAD','SELECT'])
 	with t1:
-		st.file_uploader('pdf file', type='pdf', key='pdf_file', disabled=disabled, on_change=index_pdf_file, label_visibility="collapsed")
+		st.file_uploader('pdf file', type='pdf', key='pdf_file', on_change=index_pdf_file, label_visibility="collapsed")
 		b_save()
 	with t2:
 		filenames = ['']
@@ -144,7 +144,7 @@ def ui_pdf_file():
 			else:
 				#ss['index'] = {}
 				pass
-		st.selectbox('select file', filenames, on_change=on_change, key='selected_file', label_visibility="collapsed", disabled=disabled)
+		st.selectbox('select file', filenames, on_change=on_change, key='selected_file', label_visibility="collapsed")
 		b_delete()
 		ss['spin_select_file'] = st.empty()
 
