@@ -29,7 +29,7 @@ from time import time as now
 # HANDLERS
 
 def on_api_key_change():
-	openai.api_key = os.getenv("OPENAI_API_KEY")
+	api_key = os.getenv("OPENAI_API_KEY")
 	model.use_key(api_key) # TODO: empty api_key
 	#
 	if 'data_dict' not in ss: ss['data_dict'] = {} # used only with DictStorage
