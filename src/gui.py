@@ -100,7 +100,7 @@ def ui_api_key():
 		#if api_key is None:
 			# Hardcoded API key value
 			#api_key = "YOUR_API_KEY"
-		on_api_key_change(api_key)
+		on_api_key_change()
 
 def index_pdf_file():
 	if ss['pdf_file']:
