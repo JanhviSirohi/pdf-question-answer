@@ -321,7 +321,7 @@ with st.sidebar:
 		ui_task()
 		ui_hyde_prompt()
 
-openai.api_key = os.getenv('OPENAI_KEY')
+api_key = os.getenv('OPENAI_KEY')
 #ui_api_key()
 ui_pdf_file()
 ui_question()
