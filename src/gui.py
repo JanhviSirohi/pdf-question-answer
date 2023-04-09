@@ -22,13 +22,14 @@ import storage
 import feedback
 import cache
 import os
+import openai
 
 from time import time as now
 
 # HANDLERS
 
 def on_api_key_change():
-	api_key = ss.get('api_key') or os.getenv('OPENAI_KEY')
+	openai.api_key = os.getenv('OPENAI_KEY')
 	model.use_key(api_key) # TODO: empty api_key
 	#
 	if 'data_dict' not in ss: ss['data_dict'] = {} # used only with DictStorage
@@ -43,9 +44,9 @@ def on_api_key_change():
 	ss['debug']['storage.class'] = ss['storage'].__class__.__name__
 
 
-ss['community_user'] = os.getenv('COMMUNITY_USER')
-if 'user' not in ss and ss['community_user']:
-	on_api_key_change() # use community key
+#ss['community_user'] = os.getenv('COMMUNITY_USER')
+#if 'user' not in ss and ss['community_user']:
+	#on_api_key_change() # use community key
 
 # COMPONENTS
 
