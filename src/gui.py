@@ -22,14 +22,13 @@ import storage
 import feedback
 import cache
 import os
-import openai
 
 from time import time as now
 
 # HANDLERS
 
 def on_api_key_change():
-	api_key = os.getenv("OPENAI_API_KEY")
+	api_key = ss.get('api_key') or os.getenv('OPENAI_KEY')
 	model.use_key(api_key) # TODO: empty api_key
 	#
 	if 'data_dict' not in ss: ss['data_dict'] = {} # used only with DictStorage
@@ -45,8 +44,8 @@ def on_api_key_change():
 
 
 ss['community_user'] = os.getenv('COMMUNITY_USER')
-#if 'user' not in ss and ss['community_user']:
-	#on_api_key_change() # use community key
+if 'user' not in ss and ss['community_user']:
+	on_api_key_change() # use community key
 
 # COMPONENTS
 
@@ -94,7 +93,8 @@ def ui_api_key():
 		with t2:
 			st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change, label_visibility="collapsed")
 	else:
-	openai.api_key = os.getenv("OPENAI_API_KEY")
+		st.write('## 1. Enter your OpenAI API key')
+		st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change, label_visibility="collapsed")
 
 def index_pdf_file():
 	if ss['pdf_file']:
@@ -124,7 +124,7 @@ def ui_pdf_file():
 	disabled = not ss.get('user') or (not ss.get('api_key') and not ss.get('community_pct',0))
 	t1,t2 = st.tabs(['UPLOAD','SELECT'])
 	with t1:
-		st.file_uploader('pdf file', type='pdf', key='pdf_file', on_change=index_pdf_file, label_visibility="collapsed")
+		st.file_uploader('pdf file', type='pdf', key='pdf_file', disabled=disabled, on_change=index_pdf_file, label_visibility="collapsed")
 		b_save()
 	with t2:
 		filenames = ['']
@@ -144,7 +144,7 @@ def ui_pdf_file():
 			else:
 				#ss['index'] = {}
 				pass
-		st.selectbox('select file', filenames, on_change=on_change, key='selected_file', label_visibility="collapsed")
+		st.selectbox('select file', filenames, on_change=on_change, key='selected_file', label_visibility="collapsed", disabled=disabled)
 		b_delete()
 		ss['spin_select_file'] = st.empty()
 
@@ -320,10 +320,11 @@ with st.sidebar:
 		ui_task()
 		ui_hyde_prompt()
 
-#ui_api_key()
+ui_api_key()
 ui_pdf_file()
 ui_question()
 ui_hyde_answer()
 b_ask()
 ui_output()
 ui_debug()
+
