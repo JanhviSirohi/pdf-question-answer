@@ -94,8 +94,13 @@ def ui_api_key():
 		with t2:
 			st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change, label_visibility="collapsed")
 	else:
-		st.write('## 1. Enter your OpenAI API key')
-		st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change, label_visibility="collapsed")
+		#st.write('## 1. Enter your OpenAI API key')
+		#st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change, label_visibility="collapsed")
+		api_key = os.getenv("OPENAI_API_KEY")
+		#if api_key is None:
+			# Hardcoded API key value
+			#api_key = "YOUR_API_KEY"
+		on_api_key_change(api_key)
 
 def index_pdf_file():
 	if ss['pdf_file']:
