@@ -96,7 +96,7 @@ def ui_api_key():
 	else:
 		#st.write('## 1. Enter your OpenAI API key')
 		#st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change, label_visibility="collapsed")
-		api_key = os.getenv("OPENAI_API_KEY")
+		api_key = os.getenv("OPENAI_KEY")
 		#if api_key is None:
 			# Hardcoded API key value
 			#api_key = "YOUR_API_KEY"
