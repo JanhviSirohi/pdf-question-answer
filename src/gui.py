@@ -323,11 +323,12 @@ with st.sidebar:
 		ui_task()
 		ui_hyde_prompt()
 
-ui_api_key()
-ui_pdf_file()
-ui_question()
-ui_hyde_answer()
-b_ask()
-ui_output()
-ui_debug()
-
+def main():	
+	ui_api_key()
+	ui_pdf_file()
+	ui_question()
+	ui_hyde_answer()
+	b_ask()
+	ui_output()
+	ui_debug()
+	
