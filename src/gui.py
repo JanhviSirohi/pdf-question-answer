@@ -332,3 +332,4 @@ def main():
 	ui_output()
 	ui_debug()
 	
+main()
