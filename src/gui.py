@@ -240,6 +240,8 @@ def b_ask():
 		n_after  = ss.get('n_frag_after',0)
 		index = ss.get('index',{})
 		with st.spinner('preparing answer'):
+			task = task[:13000]
+			
 			resp = model.query(question, index,
 					task=task,
 					temperature=temperature,
